@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.video_row.view.*
 
 
@@ -26,7 +27,15 @@ class MainAdapter(private val homeFeed: HomeFeed): RecyclerView.Adapter<CustomVi
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
 //        val videoTitle = videoTitles.get(position)
         val video = homeFeed.videos.get(position)
+        val thumbnailImage = video.imageUrl
+        val profileImage = video.channel.profileImageUrl
+        val thumbnailImageView = holder.view.imageView_video_thumbnail
+        val profileImageView = holder.view.imageView_channel_profile
+
+        Picasso.get().load(thumbnailImage).into(thumbnailImageView)
+        Picasso.get().load(profileImage).into(profileImageView)
         holder.view.textView_video_title.text = video.name
+        holder.view.textView_channel_name.text = video.channel.name + "  •  " + video.numberOfViews + " views \n4 days ago"
     }
 }
 
