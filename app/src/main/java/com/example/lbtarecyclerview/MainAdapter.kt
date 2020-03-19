@@ -6,13 +6,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.video_row.view.*
 
-class MainAdapter: RecyclerView.Adapter<CustomViewHolder>() {
 
-    val videoTitles = listOf<String>("First title", "Second title", "Third title", "4th")
+// add homeFeed parameter to MainAdapter class to get access to JSON data
+class MainAdapter(private val homeFeed: HomeFeed): RecyclerView.Adapter<CustomViewHolder>() {
+
+//    val videoTitles = listOf<String>("First title", "Second title", "Third title", "4th")
 
     // number of items
     override fun getItemCount(): Int {
-        return videoTitles.count()
+        return homeFeed.videos.count()
     }
     // set the view holder layout
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
@@ -22,7 +24,9 @@ class MainAdapter: RecyclerView.Adapter<CustomViewHolder>() {
     }
     // bind the data for each cell component
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        holder.view.textView_video_title.text = videoTitles[position]
+//        val videoTitle = videoTitles.get(position)
+        val video = homeFeed.videos.get(position)
+        holder.view.textView_video_title.text = video.name
     }
 }
 
