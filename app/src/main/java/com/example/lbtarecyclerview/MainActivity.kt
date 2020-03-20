@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.*
 import java.io.IOException
 
-class MainActivity : AppCompatActivity() {
+class MainActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
                 val homeFeed = gson.fromJson(body, HomeFeed::class.java)
 
 
-                runOnUiThread { // must take place in the main thread (same thread as recyclerView's view hierarchy
+                runOnUiThread { // must take place in the main thread (same thread as recyclerView's view hierarchy)
                     recyclerView_main.adapter = MainAdapter(homeFeed)
                 }
             }

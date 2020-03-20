@@ -1,5 +1,6 @@
 package com.example.lbtarecyclerview
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +19,7 @@ class MainAdapter(private val homeFeed: HomeFeed): RecyclerView.Adapter<CustomVi
         return homeFeed.videos.count()
     }
     // set the view holder layout
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder { // CustomViewHolder class defined at bottom
     val layoutInflater = LayoutInflater.from(parent.context)
         val cellForRow = layoutInflater.inflate(R.layout.video_row, parent,false)
         return CustomViewHolder(cellForRow)
@@ -39,6 +40,17 @@ class MainAdapter(private val homeFeed: HomeFeed): RecyclerView.Adapter<CustomVi
     }
 }
 
+//add onClick listener on ViewHolder to make recycler's cells clickable
 class CustomViewHolder(val view: View): RecyclerView.ViewHolder(view) {
+    // custom initializer to access properties of the class
+    init {
+        view.setOnClickListener {
+
+            // create new course detail activity with intent
+            val intent = Intent(view.context, CourseDetailActivity::class.java)
+
+            view.context.startActivity(intent)
+        }
+    }
 
 }
